@@ -4,8 +4,8 @@
 
 _name=valgrind
 _reponame=valgrind-loongarch64
-pkgname=valgrind-loongarch-git
-pkgver=3.25.0.r324.g131f7852b
+pkgname=valgrind-loong64-git
+pkgver=3.26.0.r305.g656870ad8
 pkgrel=1
 pkgdesc='A tool to help find memory-management problems in programs'
 arch=('loong64')
@@ -14,26 +14,36 @@ license=('GPL-2.0-or-later')
 depends=('glibc' 'perl')
 makedepends=('gdb' 'openmpi' 'git' 'docbook-xml' 'docbook-xsl' 'docbook-sgml')
 optdepends=(
-    'python: cg_* scripts'
+  'python: cg_* scripts'
 )
 options=('!emptydirs' '!strip')
 provides=("$_name")
 conflicts=("$_name")
 source=('git+https://github.com/CSharperMantle/valgrind-loongarch64.git'
-        'https://raw.githubusercontent.com/archlinux/svntogit-packages/packages/valgrind/trunk/valgrind-3.7.0-respect-flags.patch')
+        '0001-Make-valgrind-respect-C-CPP-LD-FLAGS.patch')
 b2sums=('SKIP'
-        'af556fdf3c02e37892bfe9afebc954cf2f1b2fa9b75c1caacfa9f3b456ebc02bf078475f9ee30079b3af5d150d41415a947c3d04235c1ea8412cf92b959c484a')
+        '06ad2aba854abc366c2e5a5b15c332b3f0cd9f998422a9c38c115d0a7e9c4d50f6720427ef97dbf549b3ea9cc5f344980594bcf842704c94d0223a998f9297a3')
 options=(!lto) # https://bugs.kde.org/show_bug.cgi?id=338252
 
 pkgver() {
-    cd "$_reponame"
-    #git describe --long --tags | sed -e 's|-|.|g' -e 's|VALGRIND_||g' -e 's|_|.|g'
-    git describe --long --tags | sed 's/^VALGRIND_//;s/\([^-]*-g\)/r\1/;s/-/./g;s|_|.|g'
+  cd "$_reponame"
+  #git describe --long --tags | sed -e 's|-|.|g' -e 's|VALGRIND_||g' -e 's|_|.|g'
+  git describe --long --tags | sed 's/^VALGRIND_//;s/\([^-]*-g\)/r\1/;s/-/./g;s|_|.|g'
 }
 
 prepare() {
   cd "$_reponame"
-  patch -Np1 < ../valgrind-3.7.0-respect-flags.patch
+
+  local src
+  for src in "${source[@]}"; do
+    src="${src%%::*}"
+    src="${src##*/}"
+    src="${src%.zst}"
+    [[ $src = *.patch ]] || continue
+    echo "Applying patch $src..."
+    patch -Np1 < "$srcdir"/"$src"
+  done
+
   sed -i 's|sgml/docbook/xsl-stylesheets|xml/docbook/xsl-stylesheets-1.79.2-nons|' docs/Makefile.am
 
   autoreconf -ifv

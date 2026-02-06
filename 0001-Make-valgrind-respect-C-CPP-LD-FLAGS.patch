@@ -1,0 +1,28 @@
+From 057b47db74640d90ab8d6c278ecabe96ff8f35f8 Mon Sep 17 00:00:00 2001
+From: Unknown <unknown@internet.invalid>
+Date: Fri, 6 Feb 2026 15:03:51 +0800
+Subject: [PATCH] Make valgrind respect {C,CPP,LD}FLAGS
+
+Link: https://github.com/archlinux/svntogit-packages/blob/5b5e6ab5ccc29af668f41d05ec1fb8e9f8f99595/valgrind/trunk/valgrind-3.7.0-respect-flags.patch
+Link: https://gitlab.archlinux.org/archlinux/packaging/packages/valgrind/-/blob/80ad24e38966ceee786154ca0d0e151c0bfb93b8/valgrind-3.7.0-respect-flags.patch
+---
+ mpi/Makefile.am | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/mpi/Makefile.am b/mpi/Makefile.am
+index 054b37b75..1e99689ee 100644
+--- a/mpi/Makefile.am
++++ b/mpi/Makefile.am
+@@ -7,9 +7,6 @@ include $(top_srcdir)/Makefile.all.am
+ CC = $(MPI_CC)
+ DEFS =
+ DEFAULT_INCLUDES =
+-CPPFLAGS =
+-CFLAGS =
+-LDFLAGS =
+ 
+ EXTRA_DIST = \
+ 	mpiwrap_type_test.c
+-- 
+2.53.0
+
