@@ -5,7 +5,7 @@
 _name=valgrind
 _reponame=valgrind-loongarch64
 pkgname=valgrind-loongarch-git
-pkgver=3.20.0.r9.g0811a612d
+pkgver=3.25.0.r324.g131f7852b
 pkgrel=1
 pkgdesc='A tool to help find memory-management problems in programs'
 arch=('loong64')
