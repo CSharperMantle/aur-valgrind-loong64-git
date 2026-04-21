@@ -5,7 +5,7 @@
 _name=valgrind
 _reponame=valgrind-loongarch64
 pkgname=valgrind-loong64-git
-pkgver=3.26.0.r305.g7934a9bff
+pkgver=3.27.0.loong64.1.r0.ge690eba9505f
 pkgrel=1
 pkgdesc='A tool to help find memory-management problems in programs'
 arch=('loong64')
@@ -27,8 +27,7 @@ options=(!lto) # https://bugs.kde.org/show_bug.cgi?id=338252
 
 pkgver() {
   cd "$_reponame"
-  #git describe --long --tags | sed -e 's|-|.|g' -e 's|VALGRIND_||g' -e 's|_|.|g'
-  git describe --long --tags | sed 's/^VALGRIND_//;s/\([^-]*-g\)/r\1/;s/-/./g;s|_|.|g'
+  git describe --long --tags --abbrev=12 | sed 's/^VALGRIND_//;s/\([^-]*-g\)/r\1/;s/-/./g;s|_|.|g' | tr '[:upper:]' '[:lower:]'
 }
 
 prepare() {

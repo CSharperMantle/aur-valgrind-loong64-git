@@ -1,6 +1,6 @@
 pkgbase = valgrind-loong64-git
 	pkgdesc = A tool to help find memory-management problems in programs
-	pkgver = 3.26.0.r305.g7934a9bff
+	pkgver = 3.27.0.loong64.1.r0.ge690eba9505f
 	pkgrel = 1
 	url = http://valgrind.org/
 	arch = loong64
