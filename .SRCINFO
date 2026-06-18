@@ -1,6 +1,6 @@
 pkgbase = valgrind-loong64-git
 	pkgdesc = A tool to help find memory-management problems in programs
-	pkgver = 3.27.0.loong64.1.r0.ge690eba9505f
+	pkgver = 3.27.1.loong64.2.r0.gaa62b8f1f1ef
 	pkgrel = 1
 	url = http://valgrind.org/
 	arch = loong64
@@ -17,7 +17,7 @@ pkgbase = valgrind-loong64-git
 	provides = valgrind
 	conflicts = valgrind
 	options = !lto
-	source = git+https://github.com/CSharperMantle/valgrind-loongarch64.git
+	source = git+https://github.com/CSharperMantle/valgrind-loongarch64.git#branch=loongarch64-linux
 	source = 0001-Make-valgrind-respect-C-CPP-LD-FLAGS.patch
 	b2sums = SKIP
 	b2sums = 06ad2aba854abc366c2e5a5b15c332b3f0cd9f998422a9c38c115d0a7e9c4d50f6720427ef97dbf549b3ea9cc5f344980594bcf842704c94d0223a998f9297a3
